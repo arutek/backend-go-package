@@ -44,8 +44,8 @@ func ParserCsv(file *multipart.FileHeader, fieldName string) (errRes map[string]
 func Response(msgVal string, dataVal interface{}, totalData int64) map[string]interface{} {
 	return helper.Response(msgVal, dataVal, totalData)
 }
-func UploadS3Public(S3Client *s3.S3, bufferFile bytes.Buffer, uploadPath string, bucketName string, contentType string) (filepath string, err error) {
-	return helper.UploadS3Public(S3Client, bufferFile, uploadPath, bucketName, contentType)
+func UploadS3Public(S3Client *s3.S3, bufferFile bytes.Buffer, bucketDomain string, uploadPath string, bucketName string, contentType string) (filepath string, err error) {
+	return helper.UploadS3Public(S3Client, bufferFile, bucketDomain, uploadPath, bucketName, contentType)
 }
 func ApiGetData(urlString string, query map[string]string) ([]byte, error) {
 	return ApiGetData(urlString, query)
