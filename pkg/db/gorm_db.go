@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/arutek/backend-go-package/helper"
+	"github.com/arutek/backend-go-package/pkg/helper"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

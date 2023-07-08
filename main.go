@@ -5,9 +5,9 @@ import (
 	"mime/multipart"
 	"net/url"
 
-	"github.com/arutek/backend-go-package/db"
-	"github.com/arutek/backend-go-package/helper"
-	"github.com/arutek/backend-go-package/network"
+	"github.com/arutek/backend-go-package/pkg/db"
+	"github.com/arutek/backend-go-package/pkg/helper"
+	"github.com/arutek/backend-go-package/pkg/network"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"gorm.io/gorm"
 )
