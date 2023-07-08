@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
-func UploadS3Public(s3Client *s3.S3, bufferFile bytes.Buffer, bucketDomain string, uploadPath string, bucketName string, contentType string) (filepath string, err error) {
+func UploadS3Public(s3Client *s3.S3, bufferFile bytes.Buffer, uploadPath string, bucketName string, contentType string) (filepath string, err error) {
 	filepath = ""
 	object := s3.PutObjectInput{
 		Bucket:      aws.String(bucketName),
@@ -21,6 +21,6 @@ func UploadS3Public(s3Client *s3.S3, bufferFile bytes.Buffer, bucketDomain strin
 		LoggerWarn(err.Error())
 		return
 	}
-	filepath = bucketDomain + "/" + bucketName + "/" + uploadPath
+	filepath = "/" + bucketName + "/" + uploadPath
 	return
 }

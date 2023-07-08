@@ -5,7 +5,7 @@ import (
 	"mime/multipart"
 )
 
-func UploadBuffer(uploadedFile *multipart.FileHeader, fieldName string) (file bytes.Buffer, fileName string, errRes map[string]interface{}) {
+func UploadBuffer(uploadedFile *multipart.FileHeader) (file bytes.Buffer, fileName string, errRes map[string]interface{}) {
 	fileName = uploadedFile.Filename
 	src, err := uploadedFile.Open()
 	if err != nil {

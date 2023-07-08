@@ -7,6 +7,7 @@ import (
 
 	"github.com/arutek/backend-go-package/db"
 	"github.com/arutek/backend-go-package/helper"
+	"github.com/arutek/backend-go-package/network"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"gorm.io/gorm"
 )
@@ -38,24 +39,24 @@ func Logger(msg string) {
 func AuthMiddleware(authHeader string) (token map[string]interface{}, errCode int, err error) {
 	return helper.AuthMiddleware(authHeader)
 }
-func ParserCsv(file *multipart.FileHeader, fieldName string) (records [][]string, errRes map[string]interface{}) {
-	return helper.ParserCsv(file, fieldName)
+func ParserCsv(file *multipart.FileHeader) (records [][]string, errRes map[string]interface{}) {
+	return helper.ParserCsv(file)
 }
 func Response(msgVal string, dataVal interface{}, totalData int64) map[string]interface{} {
 	return helper.Response(msgVal, dataVal, totalData)
 }
-func UploadS3Public(S3Client *s3.S3, bufferFile bytes.Buffer, bucketDomain string, uploadPath string, bucketName string, contentType string) (filepath string, err error) {
-	return helper.UploadS3Public(S3Client, bufferFile, bucketDomain, uploadPath, bucketName, contentType)
+func UploadS3Public(S3Client *s3.S3, bufferFile bytes.Buffer, uploadPath string, bucketName string, contentType string) (filepath string, err error) {
+	return helper.UploadS3Public(S3Client, bufferFile, uploadPath, bucketName, contentType)
 }
-func UploadBuffer(uploadedFile *multipart.FileHeader, fieldName string) (file bytes.Buffer, fileName string, errRes map[string]interface{}) {
-	return UploadBuffer(uploadedFile, fieldName)
+func UploadBuffer(uploadedFile *multipart.FileHeader) (file bytes.Buffer, fileName string, errRes map[string]interface{}) {
+	return helper.UploadBuffer(uploadedFile)
 }
 func ApiGetData(urlString string, query map[string]string) ([]byte, error) {
-	return ApiGetData(urlString, query)
+	return network.ApiGetData(urlString, query)
 }
 func ApiPostData(urlString string, payload interface{}, query map[string]string) ([]byte, error) {
-	return ApiPostData(urlString, payload, query)
+	return network.ApiPostData(urlString, payload, query)
 }
 func ApiPostForm(urlString string, formData url.Values, query map[string]string) ([]byte, error) {
-	return ApiPostForm(urlString, formData, query)
+	return network.ApiPostForm(urlString, formData, query)
 }
