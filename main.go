@@ -17,8 +17,8 @@ func GormInit(host string, user string, pass string, name string, port string, s
 func GormPaginate(page int, size int) func(paginate *gorm.DB) *gorm.DB {
 	return db.PaginateDb(page, size)
 }
-func Error(err error, errCode string, statusCode int) map[string]interface{} {
-	return helper.Error(err, errCode, statusCode)
+func Error(err error, errCode string) map[string]interface{} {
+	return helper.Error(err, errCode)
 }
 func SignAccessJwt(payload map[string]interface{}) (tokenString string, err error, httpCode int) {
 	return helper.SignAccessJwt(payload)

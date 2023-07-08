@@ -1,13 +1,6 @@
 package helper
 
-import (
-	"net/http"
-)
-
-func Error(err error, errCode string, statusCode int) map[string]interface{} {
-	if statusCode <= 0 {
-		statusCode = http.StatusInternalServerError
-	}
+func Error(err error, errCode string) map[string]interface{} {
 	LoggerErr(err.Error())
 	return Response(errCode, nil, -1)
 }
