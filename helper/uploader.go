@@ -2,34 +2,22 @@ package helper
 
 import (
 	"bytes"
-	"errors"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"mime/multipart"
 )
 
-func UploadBuffer(ctx *gin.Context, fieldName string) (file bytes.Buffer, fileName string, err error, statusCode int) {
-	statusCode = 0
-	fileBuf, err := ctx.FormFile(fieldName)
-	if err != nil {
-		LoggerErr("Failed read form: " + err.Error())
-		err = errors.New("INVALID_FILE")
-		statusCode = http.StatusBadRequest
-		return
-	}
-	fileName = fileBuf.Filename
-	src, err := fileBuf.Open()
+func UploadBuffer(uploadedFile *multipart.FileHeader, fieldName string) (file bytes.Buffer, fileName string, errRes map[string]interface{}) {
+	fileName = uploadedFile.Filename
+	src, err := uploadedFile.Open()
 	if err != nil {
 		LoggerErr("Failed buffer file: " + err.Error())
-		err = errors.New("INVALID_FILE")
-		statusCode = http.StatusBadRequest
+		errRes = Error(err, "INVALID_FILE")
 		return
 	}
 	defer src.Close()
 	var buffer bytes.Buffer
 	_, err = buffer.ReadFrom(src)
 	if err != nil {
-		err = errors.New("FILE_FAIL")
+		errRes = Error(err, "FILE_FAIL")
 		return
 	}
 	err = nil

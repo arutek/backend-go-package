@@ -20,10 +20,10 @@ func GormPaginate(page int, size int) func(paginate *gorm.DB) *gorm.DB {
 func Error(err error, errCode string) map[string]interface{} {
 	return helper.Error(err, errCode)
 }
-func SignAccessJwt(payload map[string]interface{}) (tokenString string, err error, httpCode int) {
+func SignAccessJwt(payload map[string]interface{}) (tokenString string, httpCode int, err error) {
 	return helper.SignAccessJwt(payload)
 }
-func ValidateJwt(tokenString string) (token map[string]interface{}, err error, httpCode int) {
+func ValidateJwt(tokenString string) (token map[string]interface{}, httpCode int, err error) {
 	return helper.ValidateJwt(tokenString)
 }
 func LoggerErr(msg string) {
@@ -35,10 +35,10 @@ func LoggerWarn(msg string) {
 func Logger(msg string) {
 	helper.Logger(msg)
 }
-func AuthMiddleware(authHeader string) (token map[string]interface{}, err error, errCode int) {
+func AuthMiddleware(authHeader string) (token map[string]interface{}, errCode int, err error) {
 	return helper.AuthMiddleware(authHeader)
 }
-func ParserCsv(file *multipart.FileHeader, fieldName string) (errRes map[string]interface{}, records [][]string) {
+func ParserCsv(file *multipart.FileHeader, fieldName string) (records [][]string, errRes map[string]interface{}) {
 	return helper.ParserCsv(file, fieldName)
 }
 func Response(msgVal string, dataVal interface{}, totalData int64) map[string]interface{} {
@@ -46,6 +46,9 @@ func Response(msgVal string, dataVal interface{}, totalData int64) map[string]in
 }
 func UploadS3Public(S3Client *s3.S3, bufferFile bytes.Buffer, bucketDomain string, uploadPath string, bucketName string, contentType string) (filepath string, err error) {
 	return helper.UploadS3Public(S3Client, bufferFile, bucketDomain, uploadPath, bucketName, contentType)
+}
+func UploadBuffer(uploadedFile *multipart.FileHeader, fieldName string) (file bytes.Buffer, fileName string, errRes map[string]interface{}) {
+	return UploadBuffer(uploadedFile, fieldName)
 }
 func ApiGetData(urlString string, query map[string]string) ([]byte, error) {
 	return ApiGetData(urlString, query)

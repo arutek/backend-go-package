@@ -7,14 +7,14 @@ import (
 	"time"
 )
 
-func AuthMiddleware(authHeader string) (token map[string]interface{}, err error, errCode int) {
+func AuthMiddleware(authHeader string) (token map[string]interface{}, errCode int, err error) {
 	authHeaders := strings.Split(authHeader, " ")
 	if len(authHeader) < 2 {
 		err = errors.New("UNAUTHORIZED")
 		errCode = http.StatusUnauthorized
 		return
 	}
-	claims, err, statusCode := ValidateJwt(authHeaders[1])
+	claims, statusCode, err := ValidateJwt(authHeaders[1])
 	if err != nil {
 		errCode = statusCode
 		return

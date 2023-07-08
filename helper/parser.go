@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func ParserCsv(file *multipart.FileHeader, fieldName string) (errRes map[string]interface{}, records [][]string) {
+func ParserCsv(file *multipart.FileHeader, fieldName string) (records [][]string, errRes map[string]interface{}) {
 	src, err := file.Open()
 	if err != nil {
 		errRes = Error(err, "INVALID_CSV")
