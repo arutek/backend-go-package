@@ -12,8 +12,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func GormInit(host string, user string, pass string, name string, port string, sslMode string, tz string) *gorm.DB {
-	return db.GormInit(host, user, pass, name, port, sslMode, tz)
+func GormInit(host string, user string, pass string, name string, port string, sslMode string, tz string, disableTrx bool) *gorm.DB {
+	return db.GormInit(host, user, pass, name, port, sslMode, tz, disableTrx)
 }
 func GormPaginate(page int, size int) func(paginate *gorm.DB) *gorm.DB {
 	return db.PaginateDb(page, size)

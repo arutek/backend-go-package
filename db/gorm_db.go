@@ -16,9 +16,12 @@ func GormInit(
 	port string,
 	sslMode string,
 	tz string,
+	disableTrx bool,
 ) *gorm.DB {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s", host, user, pass, name, port, sslMode, tz)
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		SkipDefaultTransaction: disableTrx,
+	})
 	if err != nil {
 		helper.LoggerErr(err.Error())
 		panic(err.Error())
