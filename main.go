@@ -60,3 +60,9 @@ func ApiPostData(urlString string, payload interface{}, query map[string]string)
 func ApiPostForm(urlString string, formData url.Values, query map[string]string) ([]byte, error) {
 	return network.ApiPostForm(urlString, formData, query)
 }
+func DeferString(s *string) string {
+	return helper.DeferString(s)
+}
+func DeferInt(s *int) int {
+	return helper.DeferInt(s)
+}
